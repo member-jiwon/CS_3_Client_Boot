@@ -17,7 +17,15 @@ public class UserDAO {
         return mybatis.selectOne("user.nickNameChack", dto.getNickname());
     }
 
-    public int signup(UserDTO dto){
+    public int signup(UserDTO dto) {
         return mybatis.insert("user.signup", dto);
+    }
+
+    public String login(UserDTO dto) {
+        return mybatis.selectOne("user.login", dto);
+    }
+
+    public String pindIdByEmail(UserDTO dto) {
+        return mybatis.selectOne("user.pindIdByEmail", dto);
     }
 }

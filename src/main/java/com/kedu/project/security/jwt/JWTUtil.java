@@ -28,7 +28,7 @@ public class JWTUtil {
 		this.jwt = JWT.require(algorithm).build();
 	}
 
-	public String createToken(String id, List<String> roles) {
+	public String createToken(String id) {
 		return JWT.create()// 토큰생성하겟음()
 				.withSubject(id)// 대표적으로쓸데이터()
 				// .withClaim("roles", roles)

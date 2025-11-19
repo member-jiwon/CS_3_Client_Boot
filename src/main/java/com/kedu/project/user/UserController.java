@@ -1,6 +1,9 @@
 package com.kedu.project.user;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +29,22 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<Integer> signup(@RequestBody UserDTO dto) {
         return ResponseEntity.ok(userService.signup(dto));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserDTO dto) {
+        Map<String, String> map = userService.login(dto);
+        System.out.println(map.get("babySeq"));
+        if (map.get("babySeq") != null) {
+            return ResponseEntity.ok(map);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/pindIdByEmail")
+    public ResponseEntity<String> pindIdByEmail(@RequestBody UserDTO dto) {
+        return ResponseEntity.ok(userService.pindIdByEmail(dto));
     }
 
 }
