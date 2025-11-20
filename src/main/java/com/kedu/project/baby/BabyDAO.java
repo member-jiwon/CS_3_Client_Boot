@@ -20,5 +20,8 @@ public class BabyDAO {
     public BabyDTO babyMypage(BabyDTO dto){
         return mybatis.selectOne("baby.babyMypage", dto);
     }
-
+    
+    public BabyDTO selectBabyInfo(int babyseq) {
+    	return mybatis.selectOne("baby.selectBabyInfo",babyseq);
+    }
 }

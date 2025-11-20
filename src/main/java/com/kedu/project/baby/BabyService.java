@@ -18,4 +18,9 @@ public class BabyService {
         dto.setFamily_code(parentsData);
         return dao.babyMypage(dto);
     }
+    
+    public BabyDTO getBabyInfo(int babySeq) {
+    	
+        return dao.selectBabyInfo(babySeq);
+    }
 }
