@@ -1,6 +1,7 @@
 package com.kedu.project.growth_chart;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,5 +15,8 @@ public class GrowthChartDAO {
     private static String NAMESPACE = "chart";
     
 
-    
+    public List<GrowthChartDTO> selectLatestMeasurementsByDateRange(Map<String, Object> params) {
+        // 매퍼 ID: chart.selectLatestMeasurements
+        return mybatis.selectList(NAMESPACE + ".selectLatestMeasurements", params);
+    }
 }
