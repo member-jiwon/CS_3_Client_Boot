@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kedu.project.baby.BabyDAO;
+import com.kedu.project.baby.BabyDTO;
 import com.kedu.project.security.crypto.EncryptionUtil;
 import com.kedu.project.security.jwt.JWTUtil;
 
@@ -34,7 +35,7 @@ public class UserService {
     public int signup(UserDTO dto) {
         dto.setPassword(EncryptionUtil.encrypt(dto.getPassword()));
         String familyCode = dto.getFamily_code();
-        if (familyCode == null) {
+        if (familyCode == "") {
             dto.setFamily_code(familyCodeMake());
         }
         return dao.signup(dto);
@@ -44,11 +45,11 @@ public class UserService {
         dto.setPassword(EncryptionUtil.encrypt(dto.getPassword()));
         // 유저 정보 포장
         UserDTO user = dao.userDataById(dto);
+        System.out.println(user.getUser_id());
         // 애기 시퀀스 ( return용 )
         String babySeq = String.valueOf(user.getLast_baby());
-        // 유저의 애기 시퀀스 리스트
-        List<Integer> babySeqList = babydao.getBabySeqList(user);
-        String token = jwt.createToken(dto.getUser_id(), babySeqList);
+        System.out.println(babySeq);
+        String token = jwt.createToken(dto.getUser_id());
 
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
@@ -59,6 +60,30 @@ public class UserService {
 
     public String pindIdByEmail(UserDTO dto) {
         return dao.pindIdByEmail(dto);
+    }
+
+    public int pindPwByEmail(UserDTO dto) {
+        dto.setPassword(EncryptionUtil.encrypt(dto.getPassword()));
+        return dao.pindPwByEmail(dto);
+    }
+
+    public UserDTO mypage(String id) {
+        UserDTO dto = new UserDTO();
+        dto.setUser_id(id);
+        return dao.userDataById(dto);
+    }
+
+    public int mypageUdate(UserDTO dto){
+        return dao.mypageUdate(dto);
+    }
+
+    public List<BabyDTO> babyListByMypage(String id){
+        String familyCode = dao.familyCode(id);
+        return babydao.babyListByMypage(familyCode);
+    }
+
+    public int changeBaby(UserDTO dto){
+        return dao.changeBaby(dto);
     }
 
     public String familyCodeMake() {
@@ -74,8 +99,8 @@ public class UserService {
                 // 해당 인덱스의 문자를 StringBuilder에 추가
                 result.append(characters.charAt(index));
             }
-            boolean exists = dao.familyCodeChack(result.toString());
-            if(!exists){
+            int exists = dao.familyCodeChack(result.toString());
+            if (exists == 0) {
                 return result.toString();
             }
         }

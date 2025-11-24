@@ -1,14 +1,19 @@
 package com.kedu.project.user;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.kedu.project.baby.BabyDTO;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RequestMapping("/user")
 @RestController
@@ -44,6 +49,33 @@ public class UserController {
     @PostMapping("/pindIdByEmail")
     public ResponseEntity<String> pindIdByEmail(@RequestBody UserDTO dto) {
         return ResponseEntity.ok(userService.pindIdByEmail(dto));
+    }
+
+    @PostMapping("/pindPwByEmail")
+    public ResponseEntity<Integer> pindPwByEmail(@RequestBody UserDTO dto) {
+        return ResponseEntity.ok(userService.pindPwByEmail(dto));
+    }
+
+    @GetMapping("/mypage")
+    public ResponseEntity<UserDTO> getMethodName(@AuthenticationPrincipal String id) {
+        return ResponseEntity.ok(userService.mypage(id));
+    }
+
+    @PostMapping("/mypageUdate")
+    public ResponseEntity<Integer> mypageUdate(@RequestBody UserDTO dto, @AuthenticationPrincipal String id) {
+        dto.setUser_id(id);
+        return ResponseEntity.ok(userService.mypageUdate(dto));
+    }
+
+    @GetMapping("/babyListByMypage")
+    public ResponseEntity<List<BabyDTO>> babyListByMypage(@AuthenticationPrincipal String id) {
+        return ResponseEntity.ok(userService.babyListByMypage(id));
+    }
+
+    @PostMapping("/changeBaby")
+    public ResponseEntity<Integer> changeBaby(@RequestBody UserDTO dto, @AuthenticationPrincipal String id) {
+        dto.setUser_id(id);
+        return ResponseEntity.ok(userService.changeBaby(dto));
     }
 
 }
