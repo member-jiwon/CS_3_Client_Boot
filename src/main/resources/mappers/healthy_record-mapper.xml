@@ -3,10 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test7">
+<mapper namespace="healthyRecor">
 
-    <select id="test7" resultType="com.kedu.project.user.UserDTO">
-        SELECT * FROM baby
+    <insert id="insert">
+        insert into healthy_record (baby_seq, user_id, test_code, is_checked, created_at) values
+        (#{baby_seq}, #{user_id}, #{test_code},
+        #{is_checked}, #{created_at})
+    </insert>
+
+    <delete id="delete">
+      delete from healthy_record where baby_seq = #{baby_seq} and user_id = #{user_id} and test_code = #{test_code}
+    </delete>
+
+    <select id="selectList" resultType="com.kedu.project.healthy_record.HealthyRecordDTO">
+      select test_code, is_checked, created_at from healthy_record where baby_seq = #{baby_seq} and user_id = #{user_id}
     </select>
 
 </mapper>
