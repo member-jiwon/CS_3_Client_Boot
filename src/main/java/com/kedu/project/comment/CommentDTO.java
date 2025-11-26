@@ -20,7 +20,7 @@ public class CommentDTO {
     private int board_seq; // 부모 시퀀스 ( 게시글 번호 )
     private Integer parent_comment_seq;//부모 댓글 시퀀스 번호
     private String user_id;
-    private int parent_comment_seq;
+//    private int parent_comment_seq;
     private int is_deleted;  // 삭제 여부
     private boolean is_reported; // 신고 횟수
     private Timestamp created_at; // 작성 날짜
