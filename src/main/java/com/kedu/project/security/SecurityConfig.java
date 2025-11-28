@@ -51,6 +51,7 @@ public class SecurityConfig {
 		config.addAllowedOrigin("http://10.5.5.0:3000");
         config.addAllowedMethod("*");
 		config.addAllowedHeader("*");
+        config.setAllowCredentials(true);
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
