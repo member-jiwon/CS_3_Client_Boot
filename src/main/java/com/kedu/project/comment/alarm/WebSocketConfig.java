@@ -1,4 +1,4 @@
-package com.kedu.project.board.alarm;
+package com.kedu.project.comment.alarm;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
