@@ -200,7 +200,12 @@ public class FileService {
     	params1.put("target_seq", target_seq);
     	params1.put("target_type", target_type);
     	params1.put("user_id", user_id);
+    	System.out.println("삭제 target_seq = " + target_seq);
+    	System.out.println("삭제 user_id = " + user_id);
+    	System.out.println("삭제 target_type = " + target_type);
     	List<FileDTO> files = dao.getFilesByParent(params1);
+    	System.out.println(files+"부모시퀀스 딸린 첨부파일 이미지 배열존재여부");
+    	
         if (files == null || files.isEmpty()) return 0;
         
         // 2. GCS에서도 파일 삭제
@@ -217,6 +222,7 @@ public class FileService {
     	Map<String, Object> params = new HashMap<>();
     	params.put("target_seq", target_seq);
     	params.put("user_id", user_id);
+    	params.put("target_type", target_type);
     	
     	return dao.deleteAllFile(params);
     }
