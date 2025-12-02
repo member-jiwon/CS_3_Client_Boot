@@ -60,4 +60,8 @@ public class UserDAO {
     public int changeBaby(UserDTO dto){
         return mybatis.update("user.changeBaby", dto);
     }
+
+    public int secessionUser(String user_id){
+        return mybatis.delete("user.secessionUser", user_id);
+    }
 }

@@ -55,4 +55,8 @@
         update user set last_baby = #{last_baby} where user_id = #{user_id}
     </update>
 
+    <delete id="secessionUser">
+        delect from user where user_id = #{user_id}
+    </delete>
+
 </mapper>   
