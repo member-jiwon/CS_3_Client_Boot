@@ -64,11 +64,12 @@
 	<update id="updateChart" parameterType="com.kedu.project.growth_chart.GrowthChartDTO">
     UPDATE growth_chart
     SET measure_value = #{measure_value},
-        update_at = NOW()
+    	measure_date = #{measure_date},
+        updated_at = NOW()
     WHERE baby_seq = #{baby_seq}
       AND user_id = #{user_id}
       AND measure_type = #{measure_type}
-      AND DATE(measure_date) = DATE(#{measure_date})
+      
 </update>
 
 </mapper>
