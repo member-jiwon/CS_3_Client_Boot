@@ -1,8 +1,10 @@
 package com.kedu.project.pregnancy_journal;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +36,12 @@ public class PregnancyJournalController {
     		@RequestParam("content") String content,
             @RequestParam(value = "imageSysList", required = false) String imageSysListJson,
             @RequestParam("pregnancy_week") String pregnancy_week,
-            @RequestParam("babySeq") String babySeq,
+            @RequestParam("baby_seq") String babySeq,
             @AuthenticationPrincipal String id
     		){
     	PregnancyJournalDTO dto =PregnancyJournalDTO.builder().title(title).content(content)
     			.pregnancy_week(Integer.parseInt(pregnancy_week)).baby_seq(Integer.parseInt(babySeq)).user_id(id).build();
-    	
+    	System.out.println(title+":"+content+":"+pregnancy_week+":"+babySeq+":"+id);
     	
     	return ResponseEntity.ok(pregnancyJournalFService.postDiary(dto,imageSysListJson));
     }
