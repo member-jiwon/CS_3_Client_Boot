@@ -1,4 +1,4 @@
-package com.kedu.project.board.alarm;
+package com.kedu.project.comment.alarm;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -6,8 +6,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AlarmDTO {
+    private int alarm_seq;
     private String user_id;
-    private String borad_seq;
-    private String comment_seq;
+    private String board_seq;
+    private Integer comment_seq;
     private String type;
 }

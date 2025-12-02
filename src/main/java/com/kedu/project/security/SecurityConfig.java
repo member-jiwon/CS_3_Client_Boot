@@ -53,6 +53,7 @@ public class SecurityConfig {
 		config.addAllowedOrigin("http://192.168.55.90:3000");
 		config.addAllowedOrigin("http://192.168.0.10:3000");
 		config.addAllowedOrigin("http://10.5.5.0:3000");
+        config.addAllowedOrigin("http://10.10.55.89:3000");
         config.addAllowedMethod("*");
 		config.addAllowedHeader("*");
         config.setAllowCredentials(true);
