@@ -116,6 +116,7 @@ public class GrowthChartController {
 	 public ResponseEntity<?> updateGrowthChart(
 	         @RequestBody List<GrowthChartDTO> updates
 	 ) {
+		 System.out.println("업데이트 찍히나요?" + updates);
 	     growthChartService.updateGrowthChart(updates);
 	     return ResponseEntity.ok("updated");
 	 }
