@@ -54,7 +54,7 @@ public class CommentService {
         }
     	
     	//2. 해당 댓글이 부모 댓글일 경우
-    	if(targetdto.getParent_comment_seq() ==null) {
+    	if(targetdto.getParent_comment_seq() == null) {
     		//자식댓글 개수 가져오기
     		int childCount = dao.getChildCount(comment_seq);
     		if(childCount>0) {//자식이 있다면

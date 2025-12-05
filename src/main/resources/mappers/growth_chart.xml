@@ -5,10 +5,72 @@
 
 <mapper namespace="chart">
 
+
     <!-- 혜빈 - 베이비 마이페이지 몸무게 출력 -->
     <select id="getWeightByBabypage" resultType="String">
         SELECT measure_value FROM growth_chart where baby_seq = #{baby_seq} 
         and measure_type = 'EFW' order by measure_date desc limit 1
     </select>
+
+    <select id="selectLatestMeasurements" parameterType="Map" resultType="com.kedu.project.growth_chart.GrowthChartDTO">
+        SELECT 
+            growth_seq, 
+            baby_seq, 
+            user_id, 
+            measure_date, 
+            measure_type, 
+            measure_value
+        FROM 
+            growth_chart
+        WHERE 
+            baby_seq = #{baby_seq}
+        AND 
+            measure_date BETWEEN #{startDate} AND #{endDate}
+    </select>
+    
+   
+    
+    <select id="countByBabyAndDate" parameterType="Map" resultType="int">
+        SELECT COUNT(*) 
+        FROM growth_chart
+        WHERE baby_seq = #{baby_seq} 
+        AND measure_date = #{measureDate} 
+        LIMIT 1;
+    </select>
+    
+    <insert id="insertMeasurement" parameterType="com.kedu.project.growth_chart.GrowthChartDTO">
+        INSERT INTO growth_chart (
+            baby_seq, 
+            user_id,
+            measure_date, 
+            measure_type, 
+            measure_value
+        ) VALUES (
+            #{baby_seq}, 
+            #{user_id},
+            #{measure_date}, 
+            #{measure_type}, 
+            #{measure_value}
+        )
+    </insert>
+    
+    <select id="selectDetail" parameterType="int" resultType="map">
+    SELECT measure_date, measure_type, measure_value
+    FROM growth_chart
+    WHERE baby_seq = #{baby_seq}
+    ORDER BY measure_date ASC
+</select>
+
+	<update id="updateChart" parameterType="com.kedu.project.growth_chart.GrowthChartDTO">
+    UPDATE growth_chart
+    SET measure_value = #{measure_value},
+    	measure_date = #{measure_date},
+        updated_at = NOW()
+    WHERE baby_seq = #{baby_seq}
+      AND user_id = #{user_id}
+      AND measure_type = #{measure_type}
+      AND measure_date = #{created_at}
+      
+</update>
 
 </mapper>

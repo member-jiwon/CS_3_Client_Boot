@@ -21,12 +21,18 @@ public class BabyDAO {
     public BabyDTO babyMypage(BabyDTO dto) {
         return mybatis.selectOne("baby.babyMypage", dto);
     }
-
+    
     public int babyInsert(BabyDTO dto) {
         return mybatis.insert("baby.babyInsert", dto);
     }
 
-    public List<BabyDTO> babyListByMypage(String family_code) {
+    public BabyDTO selectBabyInfo(int babySeq) {
+        //  mybatis.selectOne(Mapper ID, Parameter) 호출
+    	return mybatis.selectOne("baby.selectBabyInfo", babySeq);
+    }
+    
+   
+    public List<BabyDTO> babyListByMypage(String family_code){
         return mybatis.selectList("baby.babyListByMypage", family_code);
     }
 
